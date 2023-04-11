@@ -88,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                             onClick: () {
                               if (authCon.nameController.text.isNotEmpty &&
                                   authCon.passwordController.text.isNotEmpty) {
+                                authCon.login();
                               } else {
                                 print("Please fill all the field");
                                 Get.snackbar(

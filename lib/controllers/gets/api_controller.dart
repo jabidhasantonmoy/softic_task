@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dio/dio.dart' as dio;
+
+import '../../models/token_model.dart';
+import '../../views/pages/home_page.dart';
+import '../utils/static_strings.dart';
 
 class ApiController extends GetxController {
   var isLoading = false.obs;
@@ -10,6 +17,7 @@ class ApiController extends GetxController {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late TokenModel tokenModel;
 
   @override
   void onClose() {}
@@ -24,5 +32,44 @@ class ApiController extends GetxController {
     update();
   }
 
-  //Login for Admin
+  Future<void> login() async {
+    try {
+      changeLoading(true);
+      print(nameController.text);
+      print(passwordController.text);
+
+      final data = {
+        "username": nameController.text,
+        "password": passwordController.text,
+        "rememberMe": true
+      };
+      final response = await dio.Dio().post(logInUrl,
+          data: data,
+          options: dio.Options(
+            responseType: dio.ResponseType.plain,
+          ));
+
+      var value = json.decode(response.data.toString());
+
+      if (response.statusCode == 200) {
+        tokenModel = TokenModel.fromJson(value);
+
+        print(tokenModel.idToken);
+
+        changeLoading(false);
+        Get.snackbar("Success", "Login Successful");
+        Get.offAll(() => const HomePage());
+      } else {
+        changeLoading(false);
+        Get.defaultDialog(
+          title: "Error Message",
+          content: const Text("Error has occured. Try again."),
+        );
+      }
+    } catch (e) {
+      changeLoading(false);
+      Get.snackbar("Error", e.toString());
+      print("Print Error $e");
+    }
+  }
 }
