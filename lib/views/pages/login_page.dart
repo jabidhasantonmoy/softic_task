@@ -212,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           hintText: hint,
-          fillColor: textFieldBgColor,
+          fillColor: backgroundColor,
           filled: true,
           hintStyle: GoogleFonts.dmSans(
               fontSize: 12,

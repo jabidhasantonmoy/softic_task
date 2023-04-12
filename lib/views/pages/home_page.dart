@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../../controllers/gets/api_controller.dart';
 import '../../controllers/utils/helper_functions.dart';
 import '../../models/product_model.dart';
+import 'product_details_page.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/homePage';
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product List'),
+        title: const Text('Home Page'),
         actions: [
           IconButton(
             onPressed: () {},
@@ -57,13 +57,15 @@ class _HomePageState extends State<HomePage> {
 
   Widget productItem({required ProductModel product}) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.to(ProductDetailsPage(product: product));
+      },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.network(
                 product.subCategory!.category!.image!,

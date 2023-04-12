@@ -4,9 +4,9 @@ const Color backgroundColor = Colors.white;
 const Color primaryColor1 = Color(0xFFF37F61);
 const Color primaryColor2 = Color(0xFFDA4A2F);
 const Color inactiveDotColor = Color(0xFFCCCCCC);
-
+const Color editHeaderColor = Color(0xFF4B465C);
 const Color bodyTextDarkColor = Color(0xFF231F20);
-const Color textFieldBgColor = Color.fromARGB(255, 255, 255, 255);
+const Color textFieldBgColor = Color(0xFF231F20);
 const Color buttonColorMain = Color(0xFFDA4A2F);
 const Color headerColorDark = Color(0xFF374957);
 const Color darkRedColor = Color(0xFFB72E25);
